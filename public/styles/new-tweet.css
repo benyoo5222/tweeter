@@ -1,0 +1,40 @@
+section.new-tweet {
+
+    display: block;
+    border: 1px solid #cecece;
+    border-radius: 5px;
+    background-color: #eee;
+    padding: .5em;
+
+}
+
+h2 {
+
+    margin: 0;
+    border-bottom: 1px solid #161616;
+    margin-bottom: 0.75em;
+}
+
+textarea {
+
+    overflow: auto;
+    display: block;
+    width: 100%;
+    padding: 0.3em;
+
+}
+
+input[type="submit"] {
+
+    margin-top: 5px;
+
+}
+
+span.counter {
+
+    float: right;
+    margin-top: 11px;
+    font-size: 0.75em;
+    padding-right: .7em;
+
+}
