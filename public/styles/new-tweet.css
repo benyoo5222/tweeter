@@ -15,7 +15,7 @@ h2 {
     margin-bottom: 0.75em;
 }
 
-textarea {
+form textarea {
 
     overflow: auto;
     display: block;
@@ -38,3 +38,152 @@ span.counter {
     padding-right: .7em;
 
 }
+
+article {
+
+  border: 1px #cecece solid;
+  border-radius: 5px;
+  margin: 20px 0;
+
+}
+
+article:hover {
+
+  border: 1px #727272 solid;
+  border-radius: 5px;
+  margin: 20px 0;
+
+}
+
+article textarea {
+    display: block;
+    width: 100%;
+    resize: none;
+    border-bottom-color: rgb(240, 240, 240);
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-top: transparent;
+    border-right: transparent;
+    border-left: transparent;
+    vertical-align: middle;
+    padding: 1.25em .75em;
+    margin-top: 5%;
+    color: #355660;
+
+}
+
+article header {
+    background-color: #f3f3f3;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding: .5em;
+}
+
+footer {
+    padding: 1em;
+    font-size: .7em;
+    padding-top: 1em;
+    padding-right: 0;
+    padding-bottom: 1em;
+    padding-left: 1em;
+}
+
+
+
+article img {
+    border-style: none;
+    border: 1px solid;
+    vertical-align: middle;
+    overflow: hidden;
+    margin-right: .75em;
+    border-radius: 3px;
+    height: 40px;
+    width: 40px;
+}
+
+article p {
+    display: inline;
+    vertical-align: top;
+    overflow: hidden;
+    color: #657e85;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.name {
+  display: inline;
+  overflow: hidden;
+  color: #657e85;
+  font-weight: bold;
+  font-size: 1.5em;
+  position: relative;
+  bottom: 0.2em;
+}
+
+.id {
+  display: inline;
+  color: #a2a2a2;
+  font-size: .75em;
+  margin-left: 14.8em;
+  vertical-align: middle;
+  position: relative;
+  bottom: .8em;
+}
+
+.line {
+  display: inline;
+}
+
+span {
+  margin: .2em;
+}
+
+
+footer .fas.fa-flag{
+  display:none;
+}
+
+article:hover .fas.fa-flag {
+  display: inline;
+  font-style: normal;
+  font-size: 1.1em;
+  color: #62c7b8;
+}
+
+footer .fas.fa-retweet {
+  display: none;
+}
+
+article:hover .fas.fa-retweet {
+  display: inline;
+  font-style: normal;
+  font-size: 1.1em;
+  color: #62c7b8;
+}
+
+footer .fas.fa-heart {
+  display: none;
+}
+
+article:hover .fas.fa-heart {
+  display: inline;
+  font-style: normal;
+  font-size: 1.1em;
+  color: #62c7b8;
+}
+
+.icon1{
+  font-family: FontAwesome;
+  margin-left: 23em;
+}
+
+.icon2{
+  font-family: FontAwesome;
+}
+
+.icon3{
+
+  font-family: FontAwesome;
+
+}
+
