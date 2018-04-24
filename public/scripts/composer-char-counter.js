@@ -1,6 +1,6 @@
 $( document ).ready(function() {
 
-    $('.new-tweet').on('keyup', 'textarea', function(event){ // jquery selector to get the text input area
+    $('.new-tweet').on('input', 'textarea', function(event){ // jquery selector to get the text input area
 
       var inputlength = event.target.textLength; // finds the user input length
 
