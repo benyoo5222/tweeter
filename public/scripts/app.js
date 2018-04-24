@@ -54,17 +54,6 @@ const data = [
   }
 ];
 
-console.log(Date.now());
-//$(function(){
-
-//});
-// Test / driver code (temporary)
-
-
-/*$(document).ready(function(){
-  $('#tweets-container').append($tweet); // to add it to the page so we can make sure it's got all the right elements, classes, etc.
-}); */
-
 
 function createTweetElement(tweetData){
 
