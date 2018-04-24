@@ -63,6 +63,7 @@ function createTweetElement(tweetData){
 
 
 
+
     return $(`<article>
 
           <header> <img src= ${tweetData.user.avatars.small}>
@@ -95,4 +96,26 @@ function renderTweets(data) {
 
 
 renderTweets(data);
+
+
+$(document).ready(function(){
+
+  $( "#tweet" ).submit(function( event ) {
+
+  event.preventDefault();
+
+  $.ajax({
+    url : '/tweets/',
+    method: 'POST',
+    data: $('#tweet').serialize()
+  })
+  .done( function(){
+    location.reload();
+  })
+  .fail( function(){
+    console.log("error");
+  })
+
+  });
+});
 
