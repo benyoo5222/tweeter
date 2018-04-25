@@ -14,6 +14,10 @@ $( document ).ready(function() {
         charactercounter.text(result).addClass('color');
       }
 
+      if (inputlength <= 140 && inputlength > 0) {
+        $(this).closest('main').find('.err-message').slideUp(500);
+      }
+
     });
 
 });

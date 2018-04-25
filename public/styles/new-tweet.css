@@ -1,6 +1,6 @@
 section.new-tweet {
 
-    display: block;
+    display: none;
     border: 1px solid #cecece;
     border-radius: 5px;
     background-color: #eee;
@@ -38,6 +38,21 @@ span.counter {
     padding-right: .7em;
 
 }
+
+/* Styling for error message */
+
+
+.err-message {
+    display: none;
+    padding: 1em;
+    border-radius: 3px;
+    margin-top: 0;
+    margin-bottom: 1em;
+    background-color: red;
+}
+
+
+
 
 /* Styling for tweets container */
 

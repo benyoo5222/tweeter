@@ -58,15 +58,26 @@ $(document).ready(function(){
 
     event.preventDefault();
 
+    var $counter = $('#tweet span');
+
+
     var $new = $('#tweet textarea');
     var inputlength = $new['0'].value.length;
 
-    if (inputlength > 140) {
+    if (inputlength === 0){
 
-      setTimeout(function(){
-          alert("Please stay within the character limit");
-        }, 500);
+      if ($(this).closest('main').find('.err-message:first').is(':hidden')) {
+            $(this).closest('main').find('.err-message').text('Please write something before posting.').slideDown(500);
+      }
+
+    } else if (inputlength > 140) {
+
+      if ($(this).closest('main').find('.err-message:first').is(':hidden')) {
+            $(this).closest('main').find('.err-message').text('Please stay within the character limit.').slideDown(500);
+      }
+
     } else {
+
       $.ajax({
         url : '/tweets/',
         method: 'POST',
@@ -77,16 +88,12 @@ $(document).ready(function(){
       })
       .fail( function(){
 
-        setTimeout(function(){
-          alert("Please write something to post");
-        }, 500);
       });
 
       $new['0'].value = "";
+      $counter['0'].innerText = 140;
     }
   });
-
-
 });
 
 // Ajax request that handles get request to get the databse
@@ -106,7 +113,9 @@ function loadTweets(){
 
 }
 
+
 $(document).ready(function(){
+
     loadTweets();
 });
 
@@ -134,3 +143,15 @@ function calculatetime(tweetdata) {
   }
 
 }
+
+$(document).ready(function(){
+
+  $('button.compose-bar').on('click', function() {
+
+    console.log($(this).closest('#nav-bar').find('section.new-tweet'));
+
+    $('section.new-tweet').slideToggle(500);
+    $('section.new-tweet form textarea').focus();
+  });
+
+});
