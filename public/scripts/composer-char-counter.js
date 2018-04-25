@@ -9,9 +9,9 @@ $( document ).ready(function() {
       var charactercounter = $(this).closest('form').find('.counter');
 
       if (result >= 0){
-        charactercounter.text(result);
+        charactercounter.text(result).removeClass('color');
       } else {
-        charactercounter.text(result).css('color', 'red');
+        charactercounter.text(result).addClass('color');
       }
 
     });

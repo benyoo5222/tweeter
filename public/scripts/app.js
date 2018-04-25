@@ -4,78 +4,32 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
-
-// Test / driver code (temporary). Eventually will get this from the server.
-// Fake data taken from tweets.json
-const data = [
-  {
-    "user": {
-      "name": "Newton",
-      "avatars": {
-        "small":   "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_50.png",
-        "regular": "https://vanillicon.com/788e533873e80d2002fa14e1412b4188.png",
-        "large":   "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_200.png"
-      },
-      "handle": "@SirIsaac"
-    },
-    "content": {
-      "text": "If I have seen further it is by standing on the shoulders of giants"
-    },
-    "created_at": 1461116232227
-  },
-  {
-    "user": {
-      "name": "Descartes",
-      "avatars": {
-        "small":   "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_50.png",
-        "regular": "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc.png",
-        "large":   "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_200.png"
-      },
-      "handle": "@rd" },
-    "content": {
-      "text": "Je pense , donc je suis"
-    },
-    "created_at": 1461113959088
-  },
-  {
-    "user": {
-      "name": "Johann von Goethe",
-      "avatars": {
-        "small":   "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_50.png",
-        "regular": "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1.png",
-        "large":   "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_200.png"
-      },
-      "handle": "@johann49"
-    },
-    "content": {
-      "text": "Es ist nichts schrecklicher als eine tätige Unwissenheit."
-    },
-    "created_at": 1461113796368
-  }
-];
-
-
 function createTweetElement(tweetData){
 
-  var currentdate = Date.now();
-  var posttime = tweetData['created_at'];
-  var result = Math.floor((((((currentdate - posttime)/1000)/60)/60)/24)/365);
-
-
-
+  var result = calculatetime(tweetData);
 
     return $(`<article>
 
-          <header> <img src= ${tweetData.user.avatars.small}>
-           <div class='line'> <div class="name">${tweetData.user.name}</div> <div class="id">${tweetData.user.handle}</div></div>
+          <header>
+            <div class = "flex">
+              <div class='line'>
+                <img src= ${tweetData.user.avatars.small}>
+                <div class="name">${tweetData.user.name}</div>
+              </div>
+              <div class='handleid'>
+                <div class="id">${tweetData.user.handle}</div>
+              </div>
+            </div>
           </header>
 
           <textarea>${tweetData.content.text}</textarea>
 
-          <footer> ${result} years ago
-            <span class="icon1"><i class="fas fa-flag"></i></span>
-            <span class="icon2"><i class="fas fa-retweet"></i></span>
-            <span class="icon3"><i class="fas fa-heart"></i></span>
+          <footer> ${result}
+            <span class="icon">
+              <i class="fas fa-flag"></i>
+              <i class="fas fa-retweet"></i>
+              <i class="fas fa-heart"></i>
+            </span>
           </footer>
 
         </article>`);
@@ -86,36 +40,97 @@ function createTweetElement(tweetData){
 function renderTweets(data) {
 
 
-  $(document).ready(function(){
+  $('#tweets-container').empty(); //removes the container of tweets
+
     for(var obj of data) {
       var $tweet = createTweetElement(obj);
-      $('#tweets-container').append($tweet);
+      $('#tweets-container').prepend($tweet); //readds with the new tweets
     }
-  });
+
 }
 
 
-renderTweets(data);
-
+// Ajax request that listens for submit, prevents the default behaviour, sends the data of user input to the path and the method
 
 $(document).ready(function(){
 
   $( "#tweet" ).submit(function( event ) {
 
-  event.preventDefault();
+    event.preventDefault();
+
+    var $new = $('#tweet textarea');
+    var inputlength = $new['0'].value.length;
+
+    if (inputlength > 140) {
+
+      setTimeout(function(){
+          alert("Please stay within the character limit");
+        }, 500);
+    } else {
+      $.ajax({
+        url : '/tweets/',
+        method: 'POST',
+        data: $('#tweet').serialize()
+      })
+      .done( function(){
+        loadTweets();
+      })
+      .fail( function(){
+
+        setTimeout(function(){
+          alert("Please write something to post");
+        }, 500);
+      });
+
+      $new['0'].value = "";
+    }
+  });
+
+
+});
+
+// Ajax request that handles get request to get the databse
+
+function loadTweets(){
 
   $.ajax({
-    url : '/tweets/',
-    method: 'POST',
-    data: $('#tweet').serialize()
+    url : '/tweets',
+    method: 'GET',
   })
-  .done( function(){
-    location.reload();
+  .done( function(data){
+    renderTweets(data);
   })
   .fail( function(){
     console.log("error");
   })
 
-  });
+}
+
+$(document).ready(function(){
+    loadTweets();
 });
 
+
+function calculatetime(tweetdata) {
+
+  var currentdate = Date.now();
+  var posttime = tweetdata['created_at'];
+  var durationofpost = currentdate - posttime;
+
+  if (Math.floor(durationofpost/1000/60/60/24/365) > 0) {
+    return Math.floor(durationofpost/1000/60/60/24/365) + " years ago";
+  } else if (Math.floor(durationofpost/1000/60/60/24/30.416666) > 0) {
+    return Math.floor(durationofpost/1000/60/60/24/30.416666) + " months ago";
+  } else if (Math.floor(durationofpost/1000/60/60/24) > 0) {
+    return Math.floor(durationofpost/1000/60/60/24) + " days ago";
+  } else if (Math.floor(durationofpost/1000/60/60) > 0) {
+    return Math.floor(durationofpost/1000/60/60) + " hours ago";
+  } else if(Math.floor(durationofpost/1000/60) > 0 ) {
+    return Math.floor(durationofpost/1000/60) + " minutes ago";
+  } else if (Math.floor(durationofpost/1000) > 0) {
+    return Math.floor(durationofpost/1000) + " seconds ago";
+  } else {
+    return "0 seconds ago";
+  }
+
+}

@@ -39,7 +39,7 @@ span.counter {
 
 }
 
-
+/* Styling for tweets container */
 
 article {
 
@@ -84,13 +84,18 @@ article header {
 footer {
     padding: 1em;
     font-size: .7em;
-    padding-top: 1em;
-    padding-right: 0;
-    padding-bottom: 1em;
-    padding-left: 1em;
+    display: flex;
+    justify-content: space-between;
 }
 
+span {
+  margin: .2em;
+}
 
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
 
 article img {
     border-style: none;
@@ -112,6 +117,8 @@ article p {
     font-size: 1.5em;
 }
 
+
+
 .name {
   display: inline;
   overflow: hidden;
@@ -122,22 +129,21 @@ article p {
   bottom: 0.2em;
 }
 
+article .handleid {
+  justify-content: flex-end;
+  display: inline-flex;
+
+}
+
 .id {
-  display: inline;
   color: #a2a2a2;
   font-size: .75em;
-  margin-left: 14.8em;
   vertical-align: middle;
-  position: relative;
   bottom: .8em;
 }
 
 .line {
   display: inline;
-}
-
-span {
-  margin: .2em;
 }
 
 
@@ -154,6 +160,7 @@ article:hover .fas.fa-flag {
 
 footer .fas.fa-retweet {
   display: none;
+
 }
 
 article:hover .fas.fa-retweet {
@@ -174,18 +181,13 @@ article:hover .fas.fa-heart {
   color: #62c7b8;
 }
 
-.icon1{
+i {
+
   font-family: FontAwesome;
-  margin-left: 23em;
+  margin: .3em;
 }
 
-.icon2{
-  font-family: FontAwesome;
-}
-
-.icon3{
-
-  font-family: FontAwesome;
-
+.color {
+  color: red;
 }
 
