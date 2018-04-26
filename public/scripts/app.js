@@ -58,22 +58,21 @@ $(document).ready(function(){
 
     event.preventDefault();
 
-    var $counter = $('#tweet span');
-
-
-    var $new = $('#tweet textarea');
-    var inputlength = $new['0'].value.length;
+    var $counter = $('#tweet span'); //Uses jquery select the html element that shows the character count
+    var $newtweet = $('#tweet textarea'); // text area to post a tweet
+    var inputlength = $newtweet['0'].value.length;
+    var $errormessage = $(this).closest('main').find('.err-message');
 
     if (inputlength === 0){
 
       if ($(this).closest('main').find('.err-message:first').is(':hidden')) {
-            $(this).closest('main').find('.err-message').text('Please write something before posting.').slideDown(500);
+            $errormessage.text('Please write something before posting.').slideDown(500);
       }
 
     } else if (inputlength > 140) {
 
       if ($(this).closest('main').find('.err-message:first').is(':hidden')) {
-            $(this).closest('main').find('.err-message').text('Please stay within the character limit.').slideDown(500);
+            $errormessage.text('Please stay within the character limit.').slideDown(500);
       }
 
     } else {
@@ -90,7 +89,7 @@ $(document).ready(function(){
 
       });
 
-      $new['0'].value = "";
+      $newtweet['0'].value = "";
       $counter['0'].innerText = 140;
     }
   });
@@ -104,7 +103,7 @@ function loadTweets(){
     url : '/tweets',
     method: 'GET',
   })
-  .done( function(data){
+  .done( function(data){ //promise method that functions when the method is successful
     renderTweets(data);
   })
   .fail( function(){
@@ -114,13 +113,13 @@ function loadTweets(){
 }
 
 
-$(document).ready(function(){
+$(document).ready(function(){ // Loads the tweets when server loads
 
     loadTweets();
 });
 
 
-function calculatetime(tweetdata) {
+function calculatetime(tweetdata) { // Uses the linux time and calculates it to readable time that was posted
 
   var currentdate = Date.now();
   var posttime = tweetdata['created_at'];
@@ -146,12 +145,12 @@ function calculatetime(tweetdata) {
 
 $(document).ready(function(){
 
-  $('button.compose-bar').on('click', function() {
+  $('button.compose-bar').on('click', function() { // when the compose button is pressed
 
     console.log($(this).closest('#nav-bar').find('section.new-tweet'));
 
-    $('section.new-tweet').slideToggle(500);
-    $('section.new-tweet form textarea').focus();
+    $('section.new-tweet').slideToggle(500);  // the new tweet textarea toggles back and forth
+    $('section.new-tweet form textarea').focus(); //.focus() auto focuses on the textarea
   });
 
 });

@@ -21,29 +21,14 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
   if (err) {
     console.log(`Failed to connect: ${MONGODB_URI}`);
   }
-
   console.log(`Connected to mongodb: ${MONGODB_URI}`);
 
-  const DataHelpers = require("./lib/data-helpers.js")(db);
+  const DataHelpers = require("./lib/data-helpers.js")(db); // these needs to be inside the asynchronus function because "db" refers to the database which can take a while
 
-  const tweetsRoutes = require("./routes/tweets")(DataHelpers);
+  const tweetsRoutes = require("./routes/tweets")(DataHelpers); // so once the database is connected, and only then these modules can be imported and used
 
   app.use("/tweets", tweetsRoutes);
 });
-// The `data-helpers` module provides an interface to the database of tweets.
-// This simple interface layer has a big benefit: we could switch out the
-// actual database it uses and see little to no changes elsewhere in the code
-// (hint hint).
-//
-// Because it exports a function that expects the `db` as a parameter, we can
-// require it and pass the `db` parameter immediately:
-//const DataHelpers = require("./lib/data-helpers.js")(db);
-
-// The `tweets-routes` module works similarly: we pass it the `DataHelpers` object
-// so it can define routes that use it to interact with the data layer.
-//const tweetsRoutes = require("./routes/tweets")(DataHelpers);
-
-// Mount the tweets routes at the "/tweets" path prefix:
 
 
 app.listen(PORT, () => {

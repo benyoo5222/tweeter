@@ -10,9 +10,7 @@ module.exports = function makeDataHelpers(db) {
     // Saves a tweet to `db`
     saveTweet: function(newTweet, callback) {
       simulateDelay(() => {
-        //db.tweets.push(newTweet);
-        //callback(null, true);
-        db.collection('tweets').insertOne(newTweet).then( function (result){
+        db.collection('tweets').insertOne(newTweet).then( function (result){ // gets the tweets collection, inserts the document newTweet; result equals newTweet; and has a callback to handle errors
           callback(null, true);
         });
       });
@@ -21,9 +19,7 @@ module.exports = function makeDataHelpers(db) {
     // Get all tweets in `db`, sorted by newest first
     getTweets: function(callback) {
       simulateDelay(() => {
-        const sortNewestFirst = (a, b) => a.created_at - b.created_at;
-        //callback(null, db.tweets.sort(sortNewestFirst));
-        db.collection('tweets').find().sort({created_at: -1}).toArray(callback);
+        db.collection('tweets').find().sort({created_at: -1}).toArray(callback); // .find() makes it cursor, .sort() only works on cursors, toArray() makes into an array but since it takes the arguments of error and the result, we just put the variable callback because the varibale callback in tweets.js already refers error and tweets
       });
     }
 
