@@ -44,7 +44,7 @@ function renderTweets(data) {
 
     for(var obj of data) {
       var $tweet = createTweetElement(obj);
-      $('#tweets-container').prepend($tweet); //readds with the new tweets
+      $('#tweets-container').append($tweet); //readds with the new tweets
     }
 
 }
