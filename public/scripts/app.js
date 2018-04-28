@@ -63,7 +63,7 @@ $(document).ready(function(){
     var inputlength = $newtweet['0'].value.length;
     var $errormessage = $(this).closest('main').find('.err-message');
 
-    if (inputlength === 0){
+    if (inputlength === 0 || $newtweet['0'].value.search(/\S/g) === -1){
 
       if ($(this).closest('main').find('.err-message:first').is(':hidden')) {
             $errormessage.text('Please write something before posting.').slideDown(500);
@@ -143,11 +143,11 @@ function calculatetime(tweetdata) { // Uses the linux time and calculates it to 
 
 }
 
+
+// This handles the event for the button being pressed
 $(document).ready(function(){
 
   $('button.compose-bar').on('click', function() { // when the compose button is pressed
-
-    console.log($(this).closest('#nav-bar').find('section.new-tweet'));
 
     $('section.new-tweet').slideToggle(500);  // the new tweet textarea toggles back and forth
     $('section.new-tweet form textarea').focus(); //.focus() auto focuses on the textarea

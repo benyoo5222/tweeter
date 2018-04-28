@@ -1,17 +1,36 @@
 # Tweeter Project
 
-Tweeter is a simple, single-page Twitter clone.
+Tweeter is simple one page full stack web app that allows users to post and see tweets real time. The app was built using HTML, CSS, jQuery, Ajax, Express, Node, MongoDB.
 
-This repository is the starter code for the project: Students will fork and clone this repository, then build upon it to practice their HTML, CSS, JS, jQuery and AJAX front-end skills, and their Node, Express and MongoDB back-end skills.
+## Final Product
 
-## Getting Started
+!["Screenshot of Tweeter page"]
+!["Screenshot of Tweeter page with tweet textarea"]
 
-1. Fork this repository, then clone your fork of this repository.
-2. Install dependencies using the `npm install` command.
-3. Start the web server using the `npm run local` command. The app will be served at <http://localhost:8080/>.
-4. Go to <http://localhost:8080/> in your browser.
 
 ## Dependencies
 
+- Chance
+- body-parser
 - Express
-- Node 5.10.x or above
+- Node.js
+- MD5
+- MongoDB
+
+
+## Getting Started
+
+- Install all dependencies using 'npm install' command.
+- Create tweeter database with MongoDB and create a collection called tweets inside of that database.
+- Press the compose button to toggle down or up the 'compose tweet' box.
+
+## Key Features
+
+1. Press the compose button to toggle down the textarea and see that it autofocuses to the textbox.
+!["Screenshot of Tweeter compose box"]
+
+2. When the user tries to post a tweet that is empty it will flash an error message. The message dissapears once the user types any character.
+
+3. Once the user tries to post anything longer than 140 characters, the character counter becomes red and won't allow to post.
+
+4. When the user successfully posts a tweet, the list is the only part that refreshes not the whole page.
